@@ -11,13 +11,28 @@ const defaultTodos = [
   { text: 'Tomar el ', completed: false },
   { text: 'Tomar el curso ', completed: false },
   { text: 'Tomar el curso de reeacr', completed: false },
+  { text: 'new', completed: false },
 ];
 
 function App() {
+  const [todos, setTodos] = React.useState(defaultTodos);
+  const [searchValue, setSearchValue] = React.useState('');
+  console.log('los usuarios buscan todos de' + searchValue)
+
+  const completeTodos = todos.filter(
+    todo => !!todo.completed).length;
+  const totalTodos = todos.length;
+
   return (
     <>
-      <TodoCounter completed={16} total={25}/>
-      <TodoSearch/>
+      <TodoCounter 
+      completed={completeTodos} 
+      total={totalTodos}
+      />
+      <TodoSearch
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
       <TodoList>
         {defaultTodos.map(todo => (
           <TodoItem key={todo.text} 
